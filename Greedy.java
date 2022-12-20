@@ -11,6 +11,8 @@ public class Greedy {
     private double[][] distances;
     private double N;
     private double C;
+    long start;
+    long finish;
 
     public Greedy(int N, int C) { // N --- no. of facility //C --- no. of customers
         this.facilities = new ArrayList<>(N);
@@ -46,7 +48,7 @@ public class Greedy {
     }
 
     public double makeAssignment() {
-
+        
         for (int i = 0; i < C; i++) {
 
             double min = 999999;
@@ -84,9 +86,12 @@ public class Greedy {
     }
 
     public void output() throws IOException {
+        start = System.nanoTime();
         this.makeAssignment();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("output3_1.txt", true));
-        bw.write(String.format("%.4f", totalCost) + "\t");
+        finish = System.nanoTime();
+        long elapsedTime = finish - start;
+        BufferedWriter bw = new BufferedWriter(new FileWriter("output3_100.txt", true));
+        bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime+"\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
         }

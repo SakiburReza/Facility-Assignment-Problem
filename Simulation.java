@@ -7,9 +7,11 @@ public class Simulation {
     public static void main(String[] args) throws IOException {
         int N, C;
         int noOfTestCases = 50;
-        File file = new File("input3.txt");
+        File file = new File("input3_100.txt");
         Scanner scanner = new Scanner(file);
+
         for (int t = 0; t < noOfTestCases; t++) {
+
             N = scanner.nextInt();
             C = scanner.nextInt();
            // System.out.println("N = " + N + " C= " + C);
@@ -31,6 +33,7 @@ public class Simulation {
             //greedy.showAssignmentByCustomer();
             greedy.output();
         }
+        
     }
 
 }
