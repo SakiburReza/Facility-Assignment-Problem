@@ -1,9 +1,9 @@
 import random
 
-for ii in range(20):
-    noOfFacility =  noOFCustomer = 10
-    file = open(r".\FC\fc_"+str(noOfFacility)+".txt","w")
 
+noOfFacility =  noOFCustomer = 10
+file = open(r".\FC\fc_"+str(noOfFacility)+".txt","w")
+for ii in range(20):
     arr = [None] * noOfFacility
     j = 0
     for i in range(noOfFacility):
