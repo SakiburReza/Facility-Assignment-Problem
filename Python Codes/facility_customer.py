@@ -1,14 +1,14 @@
 import random
 
 
-noOfFacility =  noOFCustomer = 10
+noOfFacility =  noOFCustomer = 30
 file = open(r".\FC\fc_"+str(noOfFacility)+".txt","w")
-for ii in range(20):
+for ii in range(noOfFacility*2):
     arr = [None] * noOfFacility
     j = 0
     for i in range(noOfFacility):
         while(True):
-            temp = random.randint(1,20)
+            temp = random.randint(1,noOfFacility*2)
             flag = 0
             for k in range(j):
                 if(temp == arr[k]):
