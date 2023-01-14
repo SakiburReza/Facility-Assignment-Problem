@@ -113,11 +113,18 @@ public class Graph {
      // int[] c = new int[3];
      // int graph[][] = new int[v][v];
      // printg(graph);
-
+     String gp,fp,ip;
+     gp = "graph_"+v+".txt";
+     fp = "fc_"+fa+".txt";
+     ip = "input4/input4_"+fa+".txt";
+  
      try {
-         File myObj = new File("graph_40.txt");
-         File myObjf = new File("fc_20.txt");
-         FileWriter myWriter = new FileWriter("input4_20.txt");
+//          File myObj = new File("graph_40.txt");
+//          File myObjf = new File("fc_20.txt");
+//          FileWriter myWriter = new FileWriter("input4_20.txt");
+         File myObj = new File(gp);
+         File myObjf = new File(fp);
+         FileWriter myWriter = new FileWriter(ip);
          Scanner myReader = new Scanner(myObj);
          Scanner myReader1 = new Scanner(myObjf);
 
