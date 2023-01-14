@@ -272,24 +272,46 @@ public class HungarianBipartiteMatching
  
     public static void main(String[] args)
     {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the dimentsions of the cost matrix: ");
-        System.out.println("r:");
-        int r = sc.nextInt();
-        System.out.println("c:");
-        int c = sc.nextInt();
-        System.out.println("Enter the cost matrix: <row wise>");
-        double[][] cost = new double[r][c];
-        for (int i = 0; i < r; i++)
-        {
-            for (int j = 0; j < c; j++)
-            {
-                cost[i][j] = sc.nextDouble();
-            }
-        }
-        HungarianBipartiteMatching hbm = new HungarianBipartiteMatching(cost);
-        int[] result = hbm.execute();
-        System.out.println("Bipartite Matching: " + Arrays.toString(result));
-        sc.close();
+        double[][] cost = null;
+    	File myObj = new File("input/input3_30.txt");
+    	Scanner myReader = new Scanner(myObj);
+    	FileWriter myWriter = new FileWriter("output/output3_raf1.txt");
+    	
+    	for(int n=0; n<5; n++)
+    	{    		
+	        //Scanner myReader = new Scanner(myObj);
+	        int r =myReader.nextInt();
+	        int c =myReader.nextInt();
+	        System.out.println(r);
+	        System.out.println(c);
+	        cost = null;
+	        cost = new double[r][c];
+	        for (int i = 0; i < r; i++)
+	        {
+	            for (int j = 0; j < c; j++)
+	            {
+	                cost[i][j] = myReader.nextDouble();
+	            }
+	        }
+	        
+	        HungarianBipartiteMatching hbm = new HungarianBipartiteMatching(cost);
+	        long start = System.nanoTime();
+	        int[] result = hbm.execute();
+	        long finish = System.nanoTime();
+	        long time = finish - start;
+	        double sum=0;
+	        for(int i=0;i<c;i++)
+	        	sum+=cost[i][result[i]];
+	        
+	        myWriter.write(String. format("%.4f", sum) + "\t" + time+"\t");
+	        for(int i=0;i<c;i++)
+	        	myWriter.write(result[i] + " ");
+	        myWriter.write("\n");
+	        
+//	        System.out.println("Matching: " + Arrays.toString(result));
+//	        System.out.println("Total cost: " + sum + time);
+    	}
+    	myReader.close();
+    	myWriter.close();
     }
 }
