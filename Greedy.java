@@ -74,7 +74,7 @@ public class Greedy {
     public void showAssignmentByFacility() {
         for (int i = 0; i < N; i++) {
             System.out.println("Facility \t  Customer");
-            System.out.println(facilities.get(i).getId() + "  \t\t  " + facilities.get(i).getCustomers());
+            System.out.println(facilities.get(i).getId() +" Cap: "+facilities.get(i).getCapacity() + "  \t\t  " + facilities.get(i).getCustomers());
         }
     }
 
@@ -90,7 +90,7 @@ public class Greedy {
         this.makeAssignment();
         finish = System.nanoTime();
         long elapsedTime = finish - start;
-        BufferedWriter bw = new BufferedWriter(new FileWriter(".\\Output (Greedy) 4\\output4_100.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(".\\Multiple Capacity Input Output\\Output\\outputM1_10_mod.txt", true));
         bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime+"\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
