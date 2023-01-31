@@ -47,8 +47,16 @@ public class Greedy {
         return customers;
     }
 
+    public double getN() {
+        return N;
+    }
+
+    public double getC() {
+        return C;
+    }
+
     public double makeAssignment() {
-        
+
         for (int i = 0; i < C; i++) {
 
             double min = 999999;
@@ -71,10 +79,34 @@ public class Greedy {
         return totalCost;
     }
 
+    public Facility_Distance makePartialAssignment(int i) {
+
+        double distance = 999999;
+        int index = -1;
+
+        for (int j = 0; j < N; j++) {
+            if (facilities.get(j).getCapacity() > 0 && distances[i][j] < distance) {
+                distance = distances[i][j];
+                index = j;
+            }
+        }
+        Customer c = new Customer(i + 1);
+        c.setAssignedFacility(index + 1);
+        customers.add(c);
+        facilities.get(index).setCustomer(c);
+        facilities.get(index).setCapacity(facilities.get(index).getCapacity() - 1);
+
+        Facility_Distance fd = new Facility_Distance(facilities.get(index), distance);
+        return fd;
+
+
+    }
+
     public void showAssignmentByFacility() {
         for (int i = 0; i < N; i++) {
             System.out.println("Facility \t  Customer");
-            System.out.println(facilities.get(i).getId() +" Cap: "+facilities.get(i).getCapacity() + "  \t\t  " + facilities.get(i).getCustomers());
+            System.out.println(facilities.get(i).getId() + " Cap: " + facilities.get(i).getCapacity() + "  \t\t  "
+                    + facilities.get(i).getCustomers());
         }
     }
 
@@ -90,8 +122,9 @@ public class Greedy {
         this.makeAssignment();
         finish = System.nanoTime();
         long elapsedTime = finish - start;
-        BufferedWriter bw = new BufferedWriter(new FileWriter(".\\Multiple Capacity Input Output\\Output\\outputM1_10_mod.txt", true));
-        bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime+"\t");
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter(".\\Single Capacity Input Output\\Output (Greedy) 4\\output4_50_test.txt", true));
+        bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime + "\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
         }

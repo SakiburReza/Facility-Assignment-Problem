@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class SimulationM1 {
     public static void main(String[] args) throws IOException {
         int N, C;
-        int noOfTestCases = 50;
-        File file = new File(".\\Multiple Capacity Input Output\\inputM1_10_mod.txt");
+        int noOfTestCases = 20;
+        File file = new File(".\\Multiple Capacity Input Output\\inputM4_100_G.txt");
         Scanner scanner = new Scanner(file);
         int[] facilityCapacity;
 

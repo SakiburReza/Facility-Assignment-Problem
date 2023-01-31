@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Simulation {
     public static void main(String[] args) throws IOException {
         int N, C;
-        int noOfTestCases = 50;
-        File file = new File(".\\Input 4\\input4_100.txt");
+        int noOfTestCases = 20;
+        File file = new File(".\\Single Capacity Input Output\\input4_50_test.txt");
         Scanner scanner = new Scanner(file);
 
         for (int t = 0; t < noOfTestCases; t++) {
