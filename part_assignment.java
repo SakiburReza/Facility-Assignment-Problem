@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class part_cost {
+public class part_assignment {
     //public Optimal opt;
     public static void main(String[] args) throws IOException{
 
