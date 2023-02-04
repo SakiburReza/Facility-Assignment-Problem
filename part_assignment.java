@@ -6,6 +6,28 @@ import java.util.Scanner;
 
 public class part_assignment {
     //public Optimal opt;
+    public void correction(){
+        
+        int ci = 3, cstart = 2;
+        temp = new int[r-2][c-2]; //f_free.size;
+
+        for(int i=cstart; i<ci+1; i++)
+        { 
+            System.out.println("i= "+i);
+            int k=0;
+            for(int j=0; j<c; j++)
+            {
+                System.out.println("j= "+j);
+                if((j!=2) && (j!=4))
+                {
+                    temp[i-cstart][k] = cost[i][j];
+                    System.out.println("k= "+k);
+                    k++;
+                }
+            }
+        }
+    }
+    
     public static void main(String[] args) throws IOException{
 
         double[][] cost,temp = null;
