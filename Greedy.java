@@ -9,8 +9,8 @@ public class Greedy {
     private ArrayList<Customer> customers;
     private double totalCost;
     private double[][] distances;
-    private double N;
-    private double C;
+    private int N;
+    private int C;
     long start;
     long finish;
 
@@ -47,12 +47,17 @@ public class Greedy {
         return customers;
     }
 
-    public double getN() {
+    public int getN() {
         return N;
     }
 
-    public double getC() {
+    public int getC() {
         return C;
+    }
+    
+
+    public double[][] getDistances() {
+        return distances;
     }
 
     public double makeAssignment() {
@@ -79,7 +84,7 @@ public class Greedy {
         return totalCost;
     }
 
-    public Facility_Distance makePartialAssignment(int i) {
+    public Facility makePartialAssignment(int i) {
 
         double distance = 999999;
         int index = -1;
@@ -96,8 +101,7 @@ public class Greedy {
         facilities.get(index).setCustomer(c);
         facilities.get(index).setCapacity(facilities.get(index).getCapacity() - 1);
 
-        Facility_Distance fd = new Facility_Distance(facilities.get(index), distance);
-        return fd;
+        return new Facility(index+1, 1);
 
 
     }
@@ -123,7 +127,7 @@ public class Greedy {
         finish = System.nanoTime();
         long elapsedTime = finish - start;
         BufferedWriter bw = new BufferedWriter(
-                new FileWriter(".\\Single Capacity Input Output\\Output (Greedy) 4\\output4_50_test.txt", true));
+                new FileWriter(".\\Single Capacity Input Output\\output1_10_ExpG.txt", true));
         bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime + "\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
