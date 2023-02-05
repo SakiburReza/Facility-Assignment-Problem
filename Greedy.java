@@ -95,13 +95,9 @@ public class Greedy {
                 index = j;
             }
         }
-        Customer c = new Customer(i + 1);
-        c.setAssignedFacility(index + 1);
-        customers.add(c);
-        facilities.get(index).setCustomer(c);
-        facilities.get(index).setCapacity(facilities.get(index).getCapacity() - 1);
+        
 
-        return new Facility(index+1, 1);
+        return facilities.get(index);
 
 
     }
@@ -127,7 +123,7 @@ public class Greedy {
         finish = System.nanoTime();
         long elapsedTime = finish - start;
         BufferedWriter bw = new BufferedWriter(
-                new FileWriter(".\\Single Capacity Input Output\\output1_10_ExpG.txt", true));
+                new FileWriter(".\\Single Capacity Input Output\\output1_10_ExpG2.txt", true));
         bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime + "\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
@@ -135,5 +131,5 @@ public class Greedy {
         bw.write("\n");
         bw.close();
     }
-
+    
 }
