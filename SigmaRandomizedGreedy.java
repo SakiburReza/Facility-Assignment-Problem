@@ -2,25 +2,27 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Greedy {
-
+public class SigmaRandomizedGreedy {
     private ArrayList<Facility> facilities;
     private ArrayList<Customer> customers;
     private double totalCost;
     private double[][] distances;
     private int N;
     private int C;
+    private double sigma;
     long start;
     long finish;
 
-    public Greedy(int N, int C) { // N --- no. of facility //C --- no. of customers
+    public SigmaRandomizedGreedy(int N, int C) { // N --- no. of facility //C --- no. of customers
         this.facilities = new ArrayList<>(N);
         this.customers = new ArrayList<>(C);
         this.totalCost = 0;
         distances = new double[C][N];
         this.N = N;
         this.C = C;
+        sigma = 0.3;
     }
 
     public void setFacility(Facility f) {
@@ -65,7 +67,8 @@ public class Greedy {
         for (int i = 0; i < C; i++) {
 
             double min = 999999;
-            int index = -1;
+            int index = -1, customerPosition = 0;
+            int secondCustomerPosition=0;
 
             for (int j = 0; j < N; j++) {
                 if (facilities.get(j).getCapacity() > 0 && distances[i][j] < min) {
@@ -73,6 +76,43 @@ public class Greedy {
                     index = j;
                 }
             }
+
+            customerPosition =(int) Math.floor(distances[i][0]);
+            secondCustomerPosition =(int) Math.floor(distances[i][1]);
+            if(customerPosition == 0 && customerPosition == secondCustomerPosition) {
+                customerPosition = 1;
+            }
+
+
+            System.out.println("i = "+i);
+            System.out.println("Customer Pos: "+ customerPosition);
+       
+
+            if (min >= sigma){
+                Random random = new Random();
+                int toss = random.nextInt(100);
+                if(toss % 2 == 0){        
+                    System.out.println("Right");             //toss = 0 ---> head  ---> right
+                    for(int k = customerPosition + 1; k < N; k++){
+                        if(facilities.get(k).getCapacity() > 0){
+                            min = distances[i][k];
+                            index = k;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    System.out.println("Left");
+                    for(int k = customerPosition; k >= 0; k--){
+                        if(facilities.get(k).getCapacity() > 0){
+                            min = distances[i][k];
+                            index = k;
+                            break;
+                        }
+                    }
+                }
+            }
+            System.out.println("Index: "+ index + "  distance = "+ distances[i][index]);
             Customer c = new Customer(i + 1);
             c.setAssignedFacility(index + 1);
             customers.add(c);
@@ -83,47 +123,13 @@ public class Greedy {
         }
         return totalCost;
     }
-
-    public Facility makePartialAssignment(int i) {
-
-        double distance = 999999;
-        int index = -1;
-
-        for (int j = 0; j < N; j++) {
-            if (facilities.get(j).getCapacity() > 0 && distances[i][j] < distance) {
-                distance = distances[i][j];
-                index = j;
-            }
-        }
-        
-
-        return facilities.get(index);
-
-
-    }
-
-    public void showAssignmentByFacility() {
-        for (int i = 0; i < N; i++) {
-            System.out.println("Facility \t  Customer");
-            System.out.println(facilities.get(i).getId() + " Cap: " + facilities.get(i).getCapacity() + "  \t\t  "
-                    + facilities.get(i).getCustomers());
-        }
-    }
-
-    public void showAssignmentByCustomer() {
-        for (int i = 0; i < C; i++) {
-            System.out.println("Customer  \t  Facility");
-            System.out.println(customers.get(i).getId() + "  \t \t   " + customers.get(i).getAssignedFacility());
-        }
-    }
-
     public void output() throws IOException {
         start = System.nanoTime();
         this.makeAssignment();
         finish = System.nanoTime();
         long elapsedTime = finish - start;
         BufferedWriter bw = new BufferedWriter(
-                new FileWriter(".\\Single Capacity Input Output\\output1_10U.txt", true));
+                new FileWriter(".\\Single Capacity Input Output\\a_sgreedy_check.txt", true));
         bw.write(String.format("%.4f", totalCost) + "\t" + elapsedTime + "\t");
         for (int i = 0; i < C; i++) {
             bw.write(customers.get(i).getAssignedFacility() + " ");
@@ -131,5 +137,4 @@ public class Greedy {
         bw.write("\n");
         bw.close();
     }
-    
 }

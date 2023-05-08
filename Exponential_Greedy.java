@@ -99,7 +99,7 @@ public class Exponential_Greedy {
                 cost_in_trap += d;
                 System.out.println("d2 :"+d);
             } else {
-                Facility fy = new Facility(optimal[i]+1, 1);
+                Facility fy = greedy.getFacility(optimal[i]+1);
                 fy.setCustomer(c);
                 f_used.add(fy);
                 c.setAssignedFacility(fy.getId());
