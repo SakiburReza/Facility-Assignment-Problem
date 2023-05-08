@@ -7,8 +7,8 @@ public class SimulationSigmaGreedy {
     public static void main(String[] args) throws IOException {
         int N, C;
         int noOfTestCases = 1;
-        File file = new File(".\\Single Capacity Input Output\\input1_10.txt");
-        Scanner scanner = new Scanner(file);
+        File file = new File(".\\Single Capacity Input Output\\input1_10.txt");      
+        Scanner scanner = new Scanner(file);    
 
         for (int t = 0; t < noOfTestCases; t++) {
 
